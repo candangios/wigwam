@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "{{envBadge}}Wigwam — Web3 Wallet",
+  "name": "{{envBadge}}1ChainAi — Web3 Wallet",
   "version": "{{pkg.version}}",
   "icons": {
     "16": "icons/16.png",
@@ -9,7 +9,7 @@
   },
   "description": "__MSG_appDesc__",
   "homepage_url": "{{website}}",
-  "short_name": "Wigwam",
+  "short_name": "1ChainAi",
   "permissions": [
     "tabs",
     "storage",
@@ -17,21 +17,19 @@
     "activeTab",
     "scripting"
   ],
-
   "host_permissions": [
     "http://localhost:8545/",
     "file://*/*",
     "http://*/*",
     "https://*/*"
   ],
-
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'; frame-ancestors 'none';"
   },
   "author": "{{website}}",
   "__firefox__applications": {
     "gecko": {
-      "id": "webextension@wigwam.app",
+      "id": "webextension@1ChainAi.app",
       "strict_min_version": "68.0"
     }
   },
@@ -39,7 +37,7 @@
   "default_locale": "en",
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Wigwam",
+    "default_title": "1ChainAi",
     "default_icon": {
       "16": "icons/16.png",
       "48": "icons/128.png",

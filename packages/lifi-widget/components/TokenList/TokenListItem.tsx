@@ -88,22 +88,22 @@ export const TokenListItemButton: React.FC<TokenListItemButtonProps> = ({
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      sx={{borderRadius: '10px'}}
+      sx={{ borderRadius: '10px' }}
       dense
     >
       <ListItemAvatar>
-        <Avatar src={token.logoURI} alt={token.symbol} sx={{width: '40px', height: '40px'}}>
+        <Avatar src={token.logoURI} alt={token.symbol} sx={{ width: '40px', height: '40px' }}>
           {token.symbol?.[0]}
         </Avatar>
       </ListItemAvatar>
       <ListItemText
-        sx={{lineHeight: 1}}
-        primary={<div style={{fontSize: '14px', fontWeight: '700'}}>{token.name}</div>}
+        sx={{ lineHeight: 1 }}
+        primary={<div style={{ fontSize: '14px', fontWeight: '700' }}>{token.name}</div>}
         secondaryTypographyProps={{
           component: 'div',
         }}
         secondary={
-          <Box position="relative" height={15} sx={{color: '#737C88', fontSize: '12px'}} ref={container}>
+          <Box position="relative" height={15} sx={{ color: '#737C88', fontSize: '12px' }} ref={container}>
             <Slide
               direction="down"
               in={!showAddress}
@@ -153,7 +153,7 @@ export const TokenListItemButton: React.FC<TokenListItemButtonProps> = ({
         ) : (
           <Box sx={{ textAlign: 'right' }}>
             {Number(token.amount) ? (
-              <Typography variant="body1" sx={{color: '#C0C1C3', fontWeight: '700 !important'}} noWrap>
+              <Typography variant="body1" sx={{ color: '#C0C1C3', fontWeight: '700 !important' }} noWrap>
                 {t('format.number', {
                   value: formatTokenAmount(token.amount),
                 })}

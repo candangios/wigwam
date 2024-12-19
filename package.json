@@ -78,6 +78,7 @@
     "inter-ui": "4.0.2",
     "jotai": "2.10.0",
     "kdbxweb": "2.1.1",
+    "matrix-js-sdk": "^35.1.0",
     "mem": "9.0.2",
     "memoize-one": "6.0.0",
     "multiformats": "13.3.0",

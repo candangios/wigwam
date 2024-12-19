@@ -1,8 +1,8 @@
-import { wrapIpfsNetIcon } from "lib/wigwam-static";
+// import { wrapIpfsNetIcon } from "lib/wigwam-static";
 
 import { mergeNetworkUrls } from "core/common";
 import { Network } from "core/types";
-import { getAllEvmNetworks } from "core/common/chainList";
+// import { getAllEvmNetworks } from "core/common/chainList";
 
 import { DEFAULT_NETWORKS } from "fixtures/networks";
 
@@ -10,6 +10,23 @@ import { db } from "./schema";
 import { networks } from "./helpers";
 
 export async function setupFixtures() {
+  try {
+    await db.transaction("rw", networks, async () => {
+      const existingNetworks = await networks.bulkGet(
+        DEFAULT_NETWORKS.map((net) => net.chainId),
+      );
+
+      const toPut = DEFAULT_NETWORKS.map((net, i) => {
+        const existing = existingNetworks[i];
+        return existing ? mergeNetwork(existing, net) : net;
+      });
+
+      await networks.bulkPut(toPut);
+    });
+  } catch (err) {
+    console.error(err);
+  }
+  /*
   try {
     const allEvmNetworks =
       process.env.NODE_ENV !== "test" ? await getAllEvmNetworks() : [];
@@ -69,6 +86,7 @@ export async function setupFixtures() {
   } catch (err) {
     console.error(err);
   }
+    */
 }
 
 function mergeNetwork(saved: Network, toMerge: Network): Network {

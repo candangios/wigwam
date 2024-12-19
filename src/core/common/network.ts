@@ -119,6 +119,8 @@ export async function cleanupNetwork(chainId: number) {
 }
 
 export async function getNetwork(chainId: number) {
+  // const a = await repo.networks
+  console.log("canlog" + repo.networks);
   const net = await repo.networks.get(chainId);
   if (!net) throw new NetworkNotFoundError();
   return net;
