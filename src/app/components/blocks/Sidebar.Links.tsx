@@ -54,6 +54,11 @@ const useSidebarLinks = () => {
         Icon: ReceiveIcon,
         action: () => setReceiveOpened([true, "replace"]),
       },
+      {
+        route: Page.Assistant,
+        label: "Assistant",
+        Icon: ReceiveIcon,
+      },
       // {
       //   route: Page.Buy,
       //   label: "Buy",

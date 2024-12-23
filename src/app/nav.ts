@@ -6,6 +6,7 @@ export enum Page {
   Receive = "receive",
   Buy = "buy",
   Transfer = "transfer",
+  Assistant = "Assistant",
   Swap = "swap",
   Apps = "apps",
   Contacts = "contacts",
