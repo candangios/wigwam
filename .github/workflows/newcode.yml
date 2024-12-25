@@ -48,7 +48,7 @@ jobs:
       - uses: gacts/github-slug@v1
         id: slug
         with:
-          to-slug: ${{ github.event.pull_request.title }} Wigwam
+          to-slug: ${{ github.event.pull_request.title }} 1ChainAi
 
       - name: Export app build
         uses: actions/upload-artifact@v4

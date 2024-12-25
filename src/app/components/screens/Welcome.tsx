@@ -6,7 +6,7 @@ import { addAccountModalAtom, profileStateAtom } from "app/atoms";
 
 import BoardingPageLayout from "app/components/layouts/BoardingPageLayout";
 import Button from "app/components/elements/Button";
-import { ReactComponent as WigwamIcon } from "app/icons/Wigwam.svg";
+import { ReactComponent as WigwamIcon } from "app/icons/1ChainAi.svg";
 
 const Welcome: FC = () => {
   const { all } = useAtomValue(profileStateAtom);
@@ -50,7 +50,7 @@ const Welcome: FC = () => {
             "mb-16 text-5xl mmd:text-4xl font-bold text-brand-light",
           )}
         >
-          Welcome to Wigwam
+          Welcome to 1ChainAi
         </h1>
 
         <Button

@@ -112,7 +112,7 @@ const ChooseAddAccountWay = memo<{ onLedgerOpened?: () => void }>(
         <AddAccountHeader
           className="mb-12"
           description={
-            isInitialWallet ? "Join the future of finance with Wigwam" : null
+            isInitialWallet ? "Join the future of finance with 1ChainAi" : null
           }
         >
           {isInitialWallet ? "Let’s start your journey" : "Add more wallets"}

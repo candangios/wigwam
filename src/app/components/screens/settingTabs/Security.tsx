@@ -97,7 +97,7 @@ const Security: FC = () => {
             You should always have a backup copy of it.
             <br />
             <strong>Never, ever share</strong> your Secret Phrase, not even with
-            Wigwam!
+            1ChainAi!
           </p>
 
           <Button
@@ -138,7 +138,7 @@ const Security: FC = () => {
           <>
             Analytics
             <p className="text-xs text-brand-placeholder max-w-[18.75rem]">
-              Anonymous. Help us make Wigwam better.
+              Anonymous. Help us make 1ChainAi better.
             </p>
           </>
         }

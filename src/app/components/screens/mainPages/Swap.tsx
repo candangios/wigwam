@@ -245,7 +245,7 @@ const Swap: FC = () => {
         handleBeforeTransaction(metadata),
       onChangeFee: (newFee: number | undefined) => handleChangeFee(newFee),
       onShowFullList: (flag: boolean) => handleShowFullList(flag),
-      integrator: "Wigwam",
+      integrator: "1ChainAi",
       variant: "expandable",
       selectedCurrency: selectedCurrency,
       currencyRate: currenciesRate[selectedCurrency],

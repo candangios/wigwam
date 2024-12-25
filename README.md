@@ -1,10 +1,10 @@
-# Wigwam - Web3 Wallet
+# 1ChainAi - Web3 Wallet
 
 ### https://wigwam.app
 
 A browser extension Web3 wallet designed for Ethereum, Polygon, BNB Smart Chain, Arbitrum, and all EVM networks. Reliable and secure solution for managing accounts and crypto keys, exploring DeFi, NFTs, and GameFi.
 
-![Wigwam](./docs/banner.png)
+![1ChainAi](./docs/banner.png)
 
 **Table of Contents**
 

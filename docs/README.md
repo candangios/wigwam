@@ -1,4 +1,4 @@
-# Wigwam Web Extension Wallet - General Tech Documentation
+# 1ChainAi Web Extension Wallet - General Tech Documentation
 
 ## Architecture
 
