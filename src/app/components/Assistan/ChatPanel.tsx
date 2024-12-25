@@ -1,18 +1,8 @@
 import * as React from "react";
 import { PromptForm } from "./PromptForm";
-// import { shareChat } from '@/app/actions'
-// import { Button } from '@/components/ui/button'
-// import { PromptForm } from '@/components/prompt-form'
-// import { ButtonScrollToBottom } from '@/components/button-scroll-to-bottom'
-// import { IconShare } from '@/components/ui/icons'
-// import { FooterText } from '@/components/footer'
-// import { ChatShareDialog } from '@/components/chat-share-dialog'
-// import { useAIState, useActions, useUIState } from 'ai/rsc'
-// import type { AI, ClientMessage } from '@/lib/chat/actions'
-// import { nanoid } from 'nanoid'
-// import { UserMessage } from './stocks/message'
-// import { useAuth } from '@/lib/hooks/use-auth'
-
+import { useChat } from "app/hooks";
+import { nanoid } from "nanoid";
+import CircleSpinner from "../elements/CircleSpinner";
 export interface ChatPanelProps {
   id?: string;
   title?: string;
@@ -34,54 +24,53 @@ export function ChatPanel({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   scrollToBottom,
 }: ChatPanelProps) {
-  // const exampleMessages = [
-  //   {
-  //     content: "What is the Bitcoin?",
-  //   },
-  //   {
-  //     content: "Will SOL reach 200$ at the end of 2024?",
-  //   },
-  //   {
-  //     content: "What coin should i buy for 2025?",
-  //   },
-  // ];
+  const { messages, isLoading, addMessage } = useChat();
+  const exampleMessages = [
+    {
+      content: "What is the Bitcoin?",
+    },
+    {
+      content: "Will SOL reach 200$ at the end of 2024?",
+    },
+    {
+      content: "What coin should i buy for 2025?",
+    },
+  ];
+  async function SendMessage(content: string) {
+    const promotId = nanoid();
+    const newMessage = {
+      id: promotId,
+      sender: "user",
+      content: content,
+      timestamp: Date.now(),
+    };
+    addMessage(newMessage);
+  }
 
   return (
     <div>
       <div className=" flex  w-full  flex-wrap gap-[5px] items-center justify-center overflow-hidden ">
-        {/* {messages.length == 0 &&
+        {messages.length == 0 &&
           exampleMessages.map((example, index) => (
             <div
               key={index}
-              className={`cursor-pointer hover:bg-zinc-50 px-4 h-[14px] rounded-[1px] bg-[#D9D9D9]`}
+              className={`cursor-pointer px-4 h-[30px] flex items-center justify-center rounded-[5px] `}
               onClick={async () => {
-                setInput(example.content);
-                // const promptId = nanoid();
-
-                // setMessages((currentMessages) => [
-                //   ...currentMessages,
-                //   {
-                //     id: promptId,
-                //     display: <UserMessage>{example.content}</UserMessage>
-                //   }
-                // ])
-
-                // const responseMessage = await submitUserMessage(
-                //   example.content, promptId, access_token
-                // )
-
-                // setMessages(currentMessages => [
-                //   ...currentMessages,
-                //   responseMessage
-                // ])
+                if (isLoading) return;
+                SendMessage(example.content);
               }}
             >
-              <div className="text-[10px] font-sans text-center">
-                {example.content}
-              </div>
+              <div className="text-[13px] text-center">{example.content}</div>
             </div>
-          ))} */}
+          ))}
       </div>
+      {isLoading && (
+        <div className="flex">
+          <CircleSpinner className="mr-1 !w-5 !h-5 !text-brand-inactivelight" />
+          <p>Assistan is replying ...</p>
+        </div>
+      )}
+
       <PromptForm
         input={input}
         setInput={setInput}

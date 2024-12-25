@@ -1,13 +1,14 @@
-"use server";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ChatList from "./ChatList";
 import { ChatPanel } from "./ChatPanel";
 // import { EmptyScreen } from "./EmptyScreen";
-import { useScrollAnchor } from "app/hooks";
+import { useChat, useScrollAnchor } from "app/hooks";
 
 export function Chat() {
   const [input, setInput] = useState("");
-  const { messagesRef, scrollRef, visibilityRef } = useScrollAnchor();
+  const { isLoading } = useChat();
+  const { messagesRef, scrollRef, visibilityRef, scrollToBottom } =
+    useScrollAnchor();
 
   // const { messagesRef, scrollRef, visibilityRef, isAtBottom, scrollToBottom } =
   //   useScrollAnchor();
@@ -16,33 +17,37 @@ export function Chat() {
   //   console.log("hehe");
   // };
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [isLoading, scrollToBottom]);
   return (
-    <div className="mx-[25px] pt-[16px] flex h-[calc(100vh_-_86px)]">
-      <div className="flex flex-col w-full">
-        <div className="w-full flex-grow z-0 overflow-y-scroll" ref={scrollRef}>
-          {/* <ButtonScrollToBottom
+    <div className="flex flex-col h-[calc(100vh_-_100px)]">
+      <div
+        className="w-full flex-grow overflow-y-auto scrollbar-hide py-2"
+        ref={scrollRef}
+      >
+        {/* <ButtonScrollToBottom
           isAtBottom={isAtBottom}
           scrollToBottom={scrollToBottom}
         /> */}
 
-          <div ref={messagesRef}>
-            <ChatList />
-            <div className="w-full h-px" ref={visibilityRef} />
-          </div>
+        <div ref={messagesRef}>
+          <ChatList />
+          <div className="w-full h-px" ref={visibilityRef} />
         </div>
-        <ChatPanel
-          input={input}
-          setInput={(value: string) => {
-            setInput(value);
-            // setMessages([...messages, { id: "dgd", content: value }]);
-            // console.log(value);
-          }}
-          isAtBottom={true}
-          scrollToBottom={() => {
-            console.log("scrollToBottom");
-          }}
-        />
       </div>
+      <ChatPanel
+        input={input}
+        setInput={(value: string) => {
+          setInput(value);
+          // setMessages([...messages, { id: "dgd", content: value }]);
+          // console.log(value);
+        }}
+        isAtBottom={true}
+        scrollToBottom={() => {
+          console.log("scrollToBottom");
+        }}
+      />
     </div>
   );
 }

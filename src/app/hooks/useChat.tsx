@@ -1,5 +1,3 @@
-"use server";
-import { BotMessage } from "app/components/Assistan/ChatList";
 import axios from "axios";
 import React, {
   createContext,
@@ -11,7 +9,7 @@ import React, {
 
 export interface ChatMessage {
   id: string;
-  sender: string; // e.g., "user" or "bot"
+  sender: string; // e.g., "user" or "Assistan"
   content: string;
   display?: ReactNode;
   timestamp: number;
@@ -27,24 +25,17 @@ export function useChatManager() {
     setMessages((prev) => [...prev, bot]);
   }, []);
   async function submitUserMessage(content: string, promptId: string) {
-    // const textStream = createStreamableUI(<SpinnerMessage />);
     setIsLoading(true);
     try {
       const response = await axios.post(
         `https://api.chatgm.com/api/ai/messages`,
-
         { message: content },
       );
       setIsLoading(false);
       return {
         id: promptId,
-        sender: "user",
-        content: "",
-        display: (
-          <div>
-            <BotMessage content={response.data.data.message} />
-          </div>
-        ),
+        sender: "assistant",
+        content: response.data.data.message,
         timestamp: Date.now(),
       };
     } catch (error) {
@@ -75,13 +66,8 @@ export function useChatManager() {
       }
       return {
         id: promptId,
-        sender: "user",
-        content: "",
-        display: (
-          <div>
-            <BotMessage content={msg} />
-          </div>
-        ),
+        sender: "assistant",
+        content: msg,
         timestamp: Date.now(),
       };
     }

@@ -1,75 +1,76 @@
-import { useChat, useScrollAnchor } from "app/hooks";
+import { useAccounts, useChat } from "app/hooks";
+import classNames from "clsx";
 import { EmptyScreen } from "./EmptyScreen";
-// import { IconUser } from "./icons";
-import { StreamableValue } from "ai/rsc/dist";
-import { useStreamableText } from "./useStreamableText";
-import { cn } from "./utils";
 import { MemoizedReactMarkdown } from "./Markdown";
-import { useEffect } from "react";
+import AutoIcon from "../elements/AutoIcon";
+import { ReactComponent as Robot } from "app/icons/robot.svg";
+import ScrollAreaContainer from "../elements/ScrollAreaContainer";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
 
 const ChatList = () => {
-  const { messages, isLoading } = useChat();
-  const { scrollToBottom } = useScrollAnchor();
-
-  useEffect(() => {
-    // if (!isLoading) {
-    scrollToBottom();
-    // }
-  }, [isLoading, scrollToBottom]);
+  const { messages } = useChat();
+  const { currentAccount } = useAccounts();
   if (!messages.length) {
     return <EmptyScreen />;
   }
   return (
-    <div className="w-full h-full mx-auto ">
+    <ScrollAreaContainer
+      className={classNames("relative", "flex flex-col")}
+      viewPortClassName="pb-5 rounded-t-[.625rem] pt-5"
+      scrollBarClassName="py-0 pt-5 pb-5 !right-1"
+    >
       {messages.map((message, index) => (
         <div key={index}>
-          {message.display}
+          {message.sender === "user"
+            ? UserMessage(message.content, currentAccount.address)
+            : BotMessage(message.content, currentAccount.address)}
           {index < messages.length - 1 && <div className="h-3" />}
         </div>
       ))}
-    </div>
+    </ScrollAreaContainer>
   );
 };
 export default ChatList;
 
-// function UserMessage(content: string) {
-//   return (
-//     <div className="group relative flex items-start   ">
-//       <div className="flex size-[32px] shrink-0 select-none items-center justify-center rounded-full  bg-background shadow-sm">
-//         <IconUser />
-//       </div>
-//       <div className="flex-1 space-y-2 overflow-hidden pl-2 text-[12px] ml-4 ">
-//         {content}
-//       </div>
-//     </div>
-//   );
-// }
-export function BotMessage({
-  content,
-  className,
-}: {
-  content: string | StreamableValue<string>;
-  className?: string;
-}) {
-  const text = useStreamableText(content);
-
+function UserMessage(content: string, address: string) {
   return (
-    <div className={cn("group relative flex items-start  ", className)}>
-      <div className="flex size-[32px] shrink-0 select-none items-center justify-center rounded-full  bg-primary text-primary-foreground shadow-sm">
-        {/* <Image
-          src="/images/ChatBotAvatar.png"
-          alt="chat bot"
-          width={32}
-          height={32}
-        /> */}
+    <div className="group relative flex items-start   ">
+      <AutoIcon
+        seed={address}
+        source="dicebear"
+        type="personas"
+        className={classNames(
+          "h-14 w-14 min-w-[3.5rem]",
+          "mr-3",
+          "bg-black/20",
+          "rounded-[.625rem]",
+        )}
+      />
+      <div className="flex-1 space-y-2 overflow-hidden text-[13px] ">
+        {content}
       </div>
-      <div className="flex flex-row w-full">
-        <div className="ml-[4px] flex-1 space-y-2 overflow-hidden ">
-          <MemoizedReactMarkdown className="prose break-words text-[12px] dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 ">
-            {text}
-          </MemoizedReactMarkdown>
-        </div>
-      </div>
+    </div>
+  );
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function BotMessage(content: string, _address: string) {
+  return (
+    <div className="group relative flex items-start   ">
+      <Robot
+        className={classNames(
+          "h-14 w-14 min-w-[3.5rem]",
+          "mr-3",
+          "bg-black/20",
+          "rounded-[.625rem]",
+        )}
+      />
+      <MemoizedReactMarkdown
+        className="prose break-words text-[13px] dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 "
+        remarkPlugins={[remarkGfm, remarkMath]}
+      >
+        {content}
+      </MemoizedReactMarkdown>
     </div>
   );
 }

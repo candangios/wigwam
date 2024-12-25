@@ -94,6 +94,8 @@
     "react-merge-refs": "2.1.1",
     "react-number-format": "5.4.2",
     "react-transition-group": "4.4.5",
+    "remark-gfm": "^4.0.0",
+    "remark-math": "^6.0.0",
     "spacingjs": "1.0.8",
     "superstruct": "2.0.2",
     "tailwind-merge": "^2.6.0",
