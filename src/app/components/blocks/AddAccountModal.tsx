@@ -142,7 +142,7 @@ const AddAccountModal = memo(() => {
 
           <WigwamIcon
             className={classNames(
-              "w-16 h-auto",
+              "w-800 h-auto",
               "absolute",
               "top-0 left-1/2",
               "-translate-x-1/2 -translate-y-1/4",

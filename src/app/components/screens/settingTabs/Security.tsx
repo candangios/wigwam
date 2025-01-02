@@ -117,7 +117,7 @@ const Security: FC = () => {
         </>
       )}
 
-      <SettingsHeader className="!mb-3">Privacy</SettingsHeader>
+      {/* <SettingsHeader className="!mb-3">Privacy</SettingsHeader>
 
       <p className="mb-6 text-sm text-brand-font max-w-[30rem]">
         Read more about our{" "}
@@ -130,7 +130,7 @@ const Security: FC = () => {
           privacy here
         </a>
         .
-      </p>
+      </p> */}
 
       <Switcher
         id="analytics"

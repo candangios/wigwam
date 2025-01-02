@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC, PropsWithChildren } from "react";
 import classNames from "clsx";
 
@@ -14,13 +15,20 @@ const About: FC = () => {
   return (
     <div className="flex flex-col items-start pt-3">
       <div className="flex items-center">
-        <WigwamLogo className="w-[3.25rem] h-auto" />
-        <span className="text-2xl font-black ml-4">1ChainAi</span>
+        <WigwamLogo className="w-[6.25rem] h-auto" />
+        {/* <span className="text-2xl font-black ml-4">1ChainAi</span> */}
       </div>
 
       <p className="text-brand-font text-sm mt-6 mb-8 max-w-[20rem]">
-        1ChainAi lets you explore DeFi and NFTs in a safer, faster and more
-        modern way.
+        1chain’s Web3 AI Agent Protocol (WAAP) is designed to embed AI
+        assistants into dApps, enabling users to perform complex blockchain
+        tasks through simple chat commands. These AI assistants use Large
+        Language Models (LLMs) to create specialized AI models that can
+        communicate with crypto infrastructures, protocols, and apps to execute
+        tasks easily, securely, and efficiently for new users. These specialized
+        models, known as Large Action Models (LAMs), revolutionize the user
+        experience in the crypto space, making it incredibly straightforward and
+        accessible, thus driving mass crypto adoption.
       </p>
 
       <AboutHeader>Version</AboutHeader>
@@ -28,10 +36,10 @@ const About: FC = () => {
         {process.env.VERSION}
       </div>
 
-      <AboutHeader>Useful links</AboutHeader>
-      <LinksBlock links={usefulLinks} />
+      {/* <AboutHeader>Useful links</AboutHeader> */}
+      {/* <LinksBlock links={usefulLinks} /> */}
 
-      <Separator className="w-[10.375rem] my-3" />
+      {/* <Separator className="w-[10.375rem] my-3" />
 
       <ul className="-mx-1 flex">
         {mediaLinks.map(({ href, label, Icon }, i) => (
@@ -58,7 +66,7 @@ const About: FC = () => {
             </a>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };

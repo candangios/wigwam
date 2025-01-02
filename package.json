@@ -1,6 +1,6 @@
 {
-  "name": "@wigwam/app",
-  "version": "2.6.5",
+  "name": "@1chainai/app",
+  "version": "0.1.1",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -76,6 +76,7 @@
     "fontfaceobserver": "2.3.0",
     "fuse.js": "7.0.0",
     "hashids": "2.3.0",
+    "idb": "^8.0.1",
     "inter-ui": "4.0.2",
     "jotai": "2.10.0",
     "kdbxweb": "2.1.1",

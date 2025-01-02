@@ -7,8 +7,8 @@ import { onboardingPopupAtom } from "app/atoms";
 import ScrollAreaContainer from "app/components/elements/ScrollAreaContainer";
 import Button from "app/components/elements/Button";
 import OnboardingFirstImage from "app/images/onboarding_first.png";
-import OnboardingSecondImage from "app/images/onboarding_second.png";
-import OnboardingThirdImage from "app/images/onboarding_third.png";
+// import OnboardingSecondImage from "app/images/onboarding_second.png";
+// import OnboardingThirdImage from "app/images/onboarding_third.png";
 import WigwamLogoImage from "app/images/wigwam.png";
 
 type TStepContent = {
@@ -28,13 +28,13 @@ const stepsContent: TStepContent[] = [
     title: "Easy access",
     description:
       "If you can't find a 1ChainAi button when connecting to a dApp, you can effortlessly connect to 1ChainAi using MetaMask button instead, as this option is automatically available",
-    image: OnboardingSecondImage,
+    image: OnboardingFirstImage,
   },
   {
     title: "Always near",
     description:
       "Pin the 1ChainAi extension on your browser toolbar for fast access to your tokens and to navigate the Web3 space more efficiently",
-    image: OnboardingThirdImage,
+    image: OnboardingFirstImage,
   },
 ];
 

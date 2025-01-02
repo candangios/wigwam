@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { memo, useCallback, useMemo, useState } from "react";
 import { Field, Form } from "react-final-form";
 import classNames from "clsx";
-import { nanoid } from "nanoid";
+// import { nanoid } from "nanoid";
 import { useAtom } from "jotai";
-import { indexerApi } from "core/common/indexerApi";
+// import { indexerApi } from "core/common/indexerApi";
 
 import { tgApplicationAtom } from "app/atoms";
 import {
@@ -33,36 +34,37 @@ const DrumGameTarget = memo(() => {
   const existingApplication = useMemo(() => {
     try {
       if (tgApplication) return JSON.parse(tgApplication);
-    } catch {}
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      console.log(error);
+    }
 
     return null;
   }, [tgApplication]);
 
   const onSubmit = useCallback(
-    async (values: TgFormValues) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async (_values: TgFormValues) => {
       if (processing) return;
       setProcessing(true);
 
       try {
-        let username = values.username;
-        if (username.startsWith("@")) {
-          username = username.slice(1);
-        }
-
-        const payload = {
-          address: `stub__${nanoid()}`,
-          username,
-        };
-
-        const res = await indexerApi.post("/activity/tgapply", payload);
-
-        if (res.status >= 200 && res.status < 300) {
-          setTgApplication(
-            JSON.stringify({
-              username,
-            }),
-          );
-        }
+        // let username = values.username;
+        // if (username.startsWith("@")) {
+        //   username = username.slice(1);
+        // }
+        // const payload = {
+        //   address: `stub__${nanoid()}`,
+        //   username,
+        // };
+        // const res = await indexerApi.post("/activity/tgapply", payload);
+        // if (res.status >= 200 && res.status < 300) {
+        //   setTgApplication(
+        //     JSON.stringify({
+        //       username,
+        //     }),
+        //   );
+        // }
       } catch (err: any) {
         alert({
           title: "Error!",

@@ -3,7 +3,7 @@ import { useSetAtom } from "jotai";
 import { Field, Form } from "react-final-form";
 import { FORM_ERROR, FormApi } from "final-form";
 import { nanoid } from "nanoid";
-import classNames from "clsx";
+// import classNames from "clsx";
 import { storage } from "lib/ext/storage";
 
 import { AddAccountParams, SeedPharse } from "core/types";
@@ -23,7 +23,7 @@ import { addAccountModalAtom } from "app/atoms";
 import { useSteps } from "app/hooks/steps";
 import AddAccountContinueButton from "app/components/blocks/AddAccountContinueButton";
 import AddAccountHeader from "app/components/blocks/AddAccountHeader";
-import AcceptCheckbox from "app/components/blocks/AcceptCheckbox";
+// import AcceptCheckbox from "app/components/blocks/AcceptCheckbox";
 import PasswordField from "app/components/elements/PasswordField";
 import PasswordValidationField from "app/components/elements/PasswordValidationField";
 
@@ -99,8 +99,8 @@ const SetupPassword = memo(() => {
         render={({
           handleSubmit,
           submitting,
-          modifiedSinceLastSubmit,
-          submitError,
+          // modifiedSinceLastSubmit,
+          // submitError,
         }) => (
           <form
             onSubmit={handleSubmit}
@@ -139,7 +139,7 @@ const SetupPassword = memo(() => {
                 )}
               </Field>
 
-              <Field
+              {/* <Field
                 name="terms"
                 format={(v: string) => Boolean(v)}
                 validate={required}
@@ -173,9 +173,9 @@ const SetupPassword = memo(() => {
                     containerClassName={classNames("mt-6 w-full")}
                   />
                 )}
-              </Field>
+              </Field> */}
 
-              <Field name="analytics" format={(v: string) => Boolean(v)}>
+              {/* <Field name="analytics" format={(v: string) => Boolean(v)}>
                 {({ input, meta }) => (
                   <AcceptCheckbox
                     {...input}
@@ -200,7 +200,7 @@ const SetupPassword = memo(() => {
                     containerClassName="w-full mb-6 mt-4"
                   />
                 )}
-              </Field>
+              </Field> */}
             </div>
             <AddAccountContinueButton loading={submitting} />
           </form>

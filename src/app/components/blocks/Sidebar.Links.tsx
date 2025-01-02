@@ -13,17 +13,17 @@ import { ReactComponent as SendIcon } from "app/icons/Send.svg";
 import { ReactComponent as WalletsIcon } from "app/icons/Wallets.svg";
 // import { ReactComponent as BuyIcon } from "app/icons/Buy-page.svg";
 import { ReactComponent as SettingsIcon } from "app/icons/Settings.svg";
-import { ReactComponent as SupportIcon } from "app/icons/Support.svg";
+// import { ReactComponent as SupportIcon } from "app/icons/Support.svg";
 import { ReactComponent as ActivityIcon } from "app/icons/ActivityIcon.svg";
 // import { ReactComponent as RewardsIcon } from "app/icons/Rewards.svg";
-import * as SupportAlert from "app/components/elements/SupportAlert";
-import { useDialog } from "app/hooks/dialog";
+// import * as SupportAlert from "app/components/elements/SupportAlert";
+// import { useDialog } from "app/hooks/dialog";
 import { activityModalAtom, receiveModalAtom } from "app/atoms";
 import { useActivityBadge } from "app/hooks";
 // import { useActivityBadge, useSwapBadge, useAccounts } from "app/hooks";
 
 const useSidebarLinks = () => {
-  const { alert } = useDialog();
+  // const { alert } = useDialog();
   const setActivityOpened = useSetAtom(activityModalAtom);
   const setReceiveOpened = useSetAtom(receiveModalAtom);
   const activityBadgeAmount = useActivityBadge();
@@ -57,6 +57,11 @@ const useSidebarLinks = () => {
       {
         route: Page.Assistant,
         label: "Assistant",
+        Icon: ReceiveIcon,
+      },
+      {
+        route: Page.MatrixAssistant,
+        label: "MatrixAssistant",
         Icon: ReceiveIcon,
       },
       // {
@@ -123,17 +128,17 @@ const useSidebarLinks = () => {
         label: "Settings",
         Icon: SettingsIcon,
       },
-      {
-        label: "Support",
-        Icon: SupportIcon,
-        action: () =>
-          alert({
-            title: <SupportAlert.Title />,
-            content: <SupportAlert.Content />,
-          }),
-      },
+      // {
+      //   label: "Support",
+      //   Icon: SupportIcon,
+      //   action: () =>
+      //     alert({
+      //       title: <SupportAlert.Title />,
+      //       content: <SupportAlert.Content />,
+      //     }),
+      // },
     ];
-  }, [alert]);
+  }, []);
 
   return useMemo(
     () => ({

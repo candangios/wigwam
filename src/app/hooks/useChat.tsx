@@ -1,3 +1,4 @@
+// import { ChatDB } from "app/components/Assistan/Service/IndexedDBService";
 import axios from "axios";
 import React, {
   createContext,
@@ -6,24 +7,33 @@ import React, {
   useState,
   useCallback,
 } from "react";
+import { useAccounts } from "./account";
+import { saveMessages } from "app/components/Assistan/Service/IndexedDBService";
 
 export interface ChatMessage {
   id: string;
   sender: string; // e.g., "user" or "Assistan"
   content: string;
-  display?: ReactNode;
   timestamp: number;
 }
 export function useChatManager() {
+  const { currentAccount } = useAccounts();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 
   // Add a new message
-  const addMessage = useCallback(async (message: ChatMessage) => {
-    setMessages((prev) => [...prev, message]);
-    const bot = await submitUserMessage(message.content, message.id);
-    setMessages((prev) => [...prev, bot]);
-  }, []);
+  const addMessage = useCallback(
+    async (message: ChatMessage) => {
+      setMessages((prev) => [...prev, message]);
+      const bot = await submitUserMessage(message.content, message.id);
+      setMessages((prev) => [...prev, bot]);
+      const messages: ChatMessage[] = [message, bot];
+
+      await saveMessages(currentAccount.address, messages);
+    },
+    [currentAccount],
+  );
   async function submitUserMessage(content: string, promptId: string) {
     setIsLoading(true);
     try {

@@ -7,6 +7,7 @@ export enum Page {
   Buy = "buy",
   Transfer = "transfer",
   Assistant = "Assistant",
+  MatrixAssistant = "MatrixAssistant",
   Swap = "swap",
   Apps = "apps",
   Contacts = "contacts",

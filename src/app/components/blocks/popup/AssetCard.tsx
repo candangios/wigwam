@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   FC,
   forwardRef,
@@ -350,7 +351,7 @@ const AssetModal: FC<IAssetModalProps> = ({
             </div>
             <span className="text-xs font-medium">Receive</span>
           </Button>
-          <DeepLinkButton
+          {/* <DeepLinkButton
             text="Buy"
             onClick={() => {
               trackEvent(TEvent.BuyNavigated, {
@@ -382,7 +383,7 @@ const AssetModal: FC<IAssetModalProps> = ({
               openLink({ page: Page.Swap, token: asset.tokenSlug });
             }}
             Icon={SwapIcon}
-          />
+          /> */}
         </div>
         <Button
           theme="secondary"

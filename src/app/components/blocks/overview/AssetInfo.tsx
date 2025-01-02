@@ -1,3 +1,4 @@
+// /* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC, useEffect, useMemo, useRef } from "react";
 import { mergeRefs } from "react-merge-refs";
 import { useAtomValue } from "jotai";
@@ -9,7 +10,7 @@ import { TokenStandardValue } from "fixtures/tokens";
 
 import { AccountAsset, TokenStatus, TokenType } from "core/types";
 import { parseTokenSlug } from "core/common/tokens";
-import { TEvent, trackEvent } from "core/client";
+// import { TEvent, trackEvent } from "core/client";
 import { getTokenDetailsUrlAtom, tokenSlugAtom } from "app/atoms";
 import {
   OverflowProvider,
@@ -20,7 +21,7 @@ import {
   useExplorerLink,
   useHideToken,
   useLazyNetwork,
-  useRamp,
+  // useRamp,
   useTokenActivitiesSync,
 } from "app/hooks";
 import { Page } from "app/nav";
@@ -35,16 +36,16 @@ import { ReactComponent as SuccessIcon } from "app/icons/success.svg";
 import { ReactComponent as CopyIcon } from "app/icons/copy.svg";
 import { ReactComponent as WalletExplorerIcon } from "app/icons/external-link.svg";
 import { ReactComponent as CoinGeckoIcon } from "app/icons/coingecko.svg";
-import { ReactComponent as SwapIcon } from "app/icons/swap.svg";
+// import { ReactComponent as SwapIcon } from "app/icons/swap.svg";
 import { ReactComponent as SendIcon } from "app/icons/send-action.svg";
 import { ReactComponent as ReceiveIcon } from "app/icons/buy-action.svg";
-import { ReactComponent as BuyIcon } from "app/icons/plus-rounded.svg";
+// import { ReactComponent as BuyIcon } from "app/icons/plus-rounded.svg";
 import { ReactComponent as EyeIcon } from "app/icons/eye.svg";
 
 import TokenActivity from "./TokenActivity";
 
 const AssetInfo: FC = () => {
-  const { onRampCurrency } = useRamp();
+  // const { onRampCurrency } = useRamp();
   const tokenSlug = useAtomValue(tokenSlugAtom)!;
 
   const chainId = useChainId();
@@ -78,10 +79,10 @@ const AssetInfo: FC = () => {
 
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
-  const showBuyButton = useMemo(
-    () => tokenInfo?.status !== TokenStatus.Disabled && onRampCurrency,
-    [tokenInfo?.status, onRampCurrency],
-  );
+  // const showBuyButton = useMemo(
+  //   () => tokenInfo?.status !== TokenStatus.Disabled && onRampCurrency,
+  //   [tokenInfo?.status, onRampCurrency],
+  // );
 
   useEffect(() => {
     scrollAreaRef.current?.scrollTo(0, 0);
@@ -244,7 +245,7 @@ const AssetInfo: FC = () => {
                 <ReceiveIcon className="w-4 h-auto mr-2" />
                 Receive
               </Button>
-              <Button
+              {/* <Button
                 to={{
                   onRampOpened: true,
                   token: tokenSlug,
@@ -283,7 +284,7 @@ const AssetInfo: FC = () => {
               >
                 <SwapIcon className="w-4 h-auto mr-2" />
                 Swap
-              </Button>
+              </Button> */}
             </div>
 
             <TokenActivity token={tokenInfo!} />

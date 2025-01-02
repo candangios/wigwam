@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   FC,
   ReactNode,
@@ -144,7 +145,9 @@ const RewardsContent = memo(() => {
   const existingApplication = useMemo(() => {
     try {
       if (rewardsApplication) return JSON.parse(rewardsApplication);
-    } catch {}
+    } catch (error) {
+      console.log(error);
+    }
 
     return null;
   }, [rewardsApplication]);
@@ -460,7 +463,9 @@ const TelegramPromosContent = memo(() => {
   const existingApplication = useMemo(() => {
     try {
       if (tgApplication) return JSON.parse(tgApplication);
-    } catch {}
+    } catch (error) {
+      console.log(error);
+    }
 
     return null;
   }, [tgApplication]);
