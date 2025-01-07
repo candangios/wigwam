@@ -17,7 +17,7 @@ import Settings from "./mainPages/Settings";
 import Rewards from "./mainPages/Rewards";
 // import OnboardingPopup from "../blocks/OnboardingPopup";
 import Buy from "./mainPages/Buy";
-import Assistant from "./mainPages/Assistant";
+// import Assistant from "./mainPages/Assistant";
 import MatrixAssistant from "./mainPages/MatrixAssistant";
 
 const SwapDynamic = lazy(() => import("./mainPages/Swap"));
@@ -42,18 +42,20 @@ const MainPageRouter: FC = () => {
 };
 
 function matchMainPage(page: Page) {
-  return match(page)
-    .with(Page.Default, () => <Overview />)
-    .with(Page.Receive, () => <Receive />)
-    .with(Page.Buy, () => <Buy />)
-    .with(Page.Transfer, () => <Transfer />)
-    .with(Page.Swap, () => <SwapDynamic />)
-    .with(Page.Apps, () => <Apps />)
-    .with(Page.Contacts, () => <Contacts />)
-    .with(Page.Wallets, () => <Wallets />)
-    .with(Page.Settings, () => <Settings />)
-    .with(Page.Rewards, () => <Rewards />)
-    .with(Page.Assistant, () => <Assistant />)
-    .with(Page.MatrixAssistant, () => <MatrixAssistant />)
-    .otherwise(() => <Redirect to={{ page: Page.Default }} />);
+  return (
+    match(page)
+      .with(Page.Default, () => <Overview />)
+      .with(Page.Receive, () => <Receive />)
+      .with(Page.Buy, () => <Buy />)
+      .with(Page.Transfer, () => <Transfer />)
+      .with(Page.Swap, () => <SwapDynamic />)
+      .with(Page.Apps, () => <Apps />)
+      .with(Page.Contacts, () => <Contacts />)
+      .with(Page.Wallets, () => <Wallets />)
+      .with(Page.Settings, () => <Settings />)
+      .with(Page.Rewards, () => <Rewards />)
+      // .with(Page.Assistant, () => <Assistant />)
+      .with(Page.MatrixAssistant, () => <MatrixAssistant />)
+      .otherwise(() => <Redirect to={{ page: Page.Default }} />)
+  );
 }

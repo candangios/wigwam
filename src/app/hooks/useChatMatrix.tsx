@@ -1,4 +1,3 @@
-// import { ChatDB } from "app/components/Assistan/Service/IndexedDBService";
 import axios from "axios";
 import React, {
   createContext,
@@ -20,14 +19,32 @@ import {
   RoomEvent,
   LoginResponse,
   MsgType,
+  TimelineEvents,
 } from "matrix-js-sdk/lib";
 import { RoomMessageEventContent } from "matrix-js-sdk/lib/types";
 
+export interface MetadataMatrixMessage {
+  type?: string;
+  amount?: string;
+  sender?: string;
+  recipient?: string;
+  networkId?: string;
+  networkName?: string;
+  currency?: string;
+  tokenAddress?: string;
+  txHash?: string;
+  fromToken?: string;
+  toToken?: string;
+  linkScan: string;
+  fromTokenAddress?: string;
+  toTokenAddress?: string;
+}
 export interface ChatMatrixMessage {
   id: string;
   sender: string; // e.g., "user" or "Assistan"
   content: string;
   timestamp: number;
+  metadata?: MetadataMatrixMessage;
 }
 interface GMUser {
   gmAccessToken: string;
@@ -158,7 +175,7 @@ export function useChatMatrixManager() {
       requestLogin(currentAccount.address);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chainId, currentAccount]);
+  }, [currentAccount]);
 
   const matrix = useMemo(() => {
     try {
@@ -203,6 +220,7 @@ export function useChatMatrixManager() {
                   ? "bot"
                   : "user",
               content: event.getContent().body, //event.getContent().body,
+              metadata: event.getContent().metadata,
               timestamp: event.getAge() ?? 1,
             };
             setMessages((prev) => [...prev, msg]);
@@ -295,30 +313,67 @@ export function useChatMatrixManager() {
         .catch((error: any) => {
           console.log("login matrix error:" + error);
         });
-      matrixClient.startClient({ initialSyncLimit: 10 });
+      matrixClient.startClient({ initialSyncLimit: 50 });
       return matrixClient;
     } catch (error) {
       console.log(error);
     }
   }, [gmUser, matrixUser, room_id]);
-  async function submitUserMessage(content: string) {
+  async function submitUserMessage(msg: string) {
     if (!room_id) return;
     setIsLoading(true);
     try {
-      await matrix?.sendTextMessage(room_id, content, "");
+      const content: RoomMessageEventContent = {
+        msgtype: MsgType.Text,
+        body: msg,
+        // metadata: {
+        //   networkId: chainId,
+        //   address: currentAccount.address,
+        // },
+      };
+      await matrix?.sendEvent(
+        room_id,
+        "m.room.message" as keyof TimelineEvents,
+        content,
+        "",
+      );
+      // await matrix?.sendTextMessage(room_id, content, "");
       setIsLoading(false);
     } catch (error) {
       console.log(error);
       setIsLoading(false);
     }
   }
-  const replyBot = () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const content: RoomMessageEventContent = {
-      msgtype: MsgType.Text,
-      body: "hello",
-    };
-    matrix?.sendMessage(room_id!, content, "");
+  const replyBot = async (
+    msg: string,
+    eventId: string,
+    type: string,
+    txHash?: string,
+  ) => {
+    try {
+      if (!room_id) return;
+      setIsLoading(true);
+      console.log(eventId + type + txHash);
+      const content: RoomMessageEventContent = {
+        msgtype: MsgType.Text,
+        body: msg,
+        // metadata: {
+        //   eventId,
+        //   txHash,
+        //   type,
+        // },
+      };
+      const a = await matrix?.sendEvent(
+        room_id,
+        "m.unknown" as keyof TimelineEvents,
+        content,
+      );
+      console.log("cangrlooooo" + a?.event_id);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
   };
   // Clear all messages
   const clearMessages = useCallback(() => {

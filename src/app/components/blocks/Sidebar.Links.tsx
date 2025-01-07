@@ -15,6 +15,7 @@ import { ReactComponent as WalletsIcon } from "app/icons/Wallets.svg";
 import { ReactComponent as SettingsIcon } from "app/icons/Settings.svg";
 // import { ReactComponent as SupportIcon } from "app/icons/Support.svg";
 import { ReactComponent as ActivityIcon } from "app/icons/ActivityIcon.svg";
+import { ReactComponent as Robot } from "app/icons/robot.svg";
 // import { ReactComponent as RewardsIcon } from "app/icons/Rewards.svg";
 // import * as SupportAlert from "app/components/elements/SupportAlert";
 // import { useDialog } from "app/hooks/dialog";
@@ -55,14 +56,9 @@ const useSidebarLinks = () => {
         action: () => setReceiveOpened([true, "replace"]),
       },
       {
-        route: Page.Assistant,
-        label: "Assistant",
-        Icon: ReceiveIcon,
-      },
-      {
         route: Page.MatrixAssistant,
-        label: "MatrixAssistant",
-        Icon: ReceiveIcon,
+        label: "Assistant",
+        Icon: Robot,
       },
       // {
       //   route: Page.Buy,

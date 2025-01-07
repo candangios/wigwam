@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const theme = require("tailwindcss/defaultTheme");
 const plugin = require("tailwindcss/plugin");
 
@@ -10,8 +11,8 @@ module.exports = {
           darkaccent: "#0D1311",
           darkbg: "#13191F",
           lightgray: "#E4E4E4",
-          redone: "#80EF6E",
-          redtwo: "#80EF6E",
+          redone: "#8C56FF",
+          redtwo: "#8C56FF",
           dark: "#181A1F",
           darkblue: "#0E1314",
           darklight: "#2A3C3F",
