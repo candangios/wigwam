@@ -16,16 +16,13 @@ import { useChainId } from "./chainId";
 import { ClientProvider } from "core/client";
 import { SelfActivityKind } from "core/types";
 import {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  ClientEvent,
   createClient,
+  RoomEvent,
   LoginResponse,
   MsgType,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  Room,
-  RoomEvent,
-} from "matrix-js-sdk";
+} from "matrix-js-sdk/lib";
 import { RoomMessageEventContent } from "matrix-js-sdk/lib/types";
+
 export interface ChatMatrixMessage {
   id: string;
   sender: string; // e.g., "user" or "Assistan"
