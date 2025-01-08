@@ -7,11 +7,11 @@ import MatrixChatList from "./MatrixComponents/MatrixChatList";
 
 export function ChatMatrix() {
   const [input, setInput] = useState("");
-  const { isLoading } = useChatMatrix();
+  const { messages } = useChatMatrix();
   const { messagesRef, visibilityRef, scrollToBottom } = useScrollAnchor();
   useEffect(() => {
     scrollToBottom();
-  }, [isLoading, scrollToBottom]);
+  }, [messages.length, scrollToBottom]);
   return (
     <div className="flex flex-col h-[calc(100vh_-_100px)]">
       <div className="w-full flex-grow overflow-y-auto scrollbar-hide py-2">

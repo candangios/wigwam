@@ -22,6 +22,15 @@ import {
   TimelineEvents,
 } from "matrix-js-sdk/lib";
 import { RoomMessageEventContent } from "matrix-js-sdk/lib/types";
+// import { RoomMessageEventContent } from "matrix-js-sdk/types";
+// import {
+//   createClient,
+//   RoomEvent,
+//   LoginResponse,
+//   MsgType,
+//   TimelineEvents,
+// } from "matrix-js-sdk/lib";
+// import { RoomMessageEventContent } from "matrix-js-sdk/lib/types";
 
 export interface MetadataMatrixMessage {
   type?: string;
@@ -185,7 +194,7 @@ export function useChatMatrixManager() {
           accessToken: matrixUser.accessToken,
           userId: matrixUser.userId,
         });
-        matrixClient.startClient({ initialSyncLimit: 30 });
+        matrixClient.startClient({ initialSyncLimit: 100 });
         if (!room_id) {
           matrixClient
             .createRoom({ invite: ["@gm.1chainAI:chatgm.com"] })
@@ -268,7 +277,7 @@ export function useChatMatrixManager() {
                 console.log("create room error:" + error);
               });
           }
-          matrixClient.startClient({ initialSyncLimit: 30 });
+          matrixClient.startClient({ initialSyncLimit: 100 });
           if (!room_id) {
             matrixClient
               .createRoom({ invite: ["@gm.1chainAI:chatgm.com"] })
@@ -313,7 +322,6 @@ export function useChatMatrixManager() {
         .catch((error: any) => {
           console.log("login matrix error:" + error);
         });
-      matrixClient.startClient({ initialSyncLimit: 50 });
       return matrixClient;
     } catch (error) {
       console.log(error);
@@ -326,10 +334,10 @@ export function useChatMatrixManager() {
       const content: RoomMessageEventContent = {
         msgtype: MsgType.Text,
         body: msg,
-        // metadata: {
-        //   networkId: chainId,
-        //   address: currentAccount.address,
-        // },
+        metadata: {
+          networkId: chainId,
+          address: currentAccount.address,
+        },
       };
       await matrix?.sendEvent(
         room_id,
@@ -355,13 +363,13 @@ export function useChatMatrixManager() {
       setIsLoading(true);
       console.log(eventId + type + txHash);
       const content: RoomMessageEventContent = {
-        msgtype: MsgType.Text,
+        msgtype: MsgType.None,
         body: msg,
-        // metadata: {
-        //   eventId,
-        //   txHash,
-        //   type,
-        // },
+        metadata: {
+          eventId,
+          txHash: null,
+          type,
+        },
       };
       const a = await matrix?.sendEvent(
         room_id,
