@@ -1,16 +1,28 @@
 import { FC, Suspense } from "react";
 import { useLazyAtomValue } from "lib/atom-utils";
+import classNames from "clsx";
 
 import { getTotalAccountBalanceAtom } from "app/atoms";
-import { useAccounts, useIsSyncing } from "app/hooks";
+import { useAccounts, useIsSyncing, useLazyNetwork } from "app/hooks";
 import FiatAmount from "app/components/elements/FiatAmount";
 import ProfileButton from "app/components/elements/ProfileButton";
+import NetworkIcon from "../elements/NetworkIcon";
 
 const Menu: FC = () => {
   const isSyncing = useIsSyncing();
+  const currentNetwork = useLazyNetwork();
+  // const explorerLink = useExplorerLink(currentNetwork);
 
   return (
-    <div className="flex items-center py-2 border-b border-brand-main/[.07]">
+    <div className="flex items-center py-2 border-b border-brand-main/[.07] gap-2">
+      {currentNetwork && (
+        <NetworkIcon
+          key={currentNetwork?.chainId}
+          network={currentNetwork!}
+          className={classNames("w-11 h-11")}
+        />
+      )}
+
       <Suspense>
         <TotalBalance />
       </Suspense>

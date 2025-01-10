@@ -54,6 +54,7 @@ export interface ChatMatrixMessage {
   content: string;
   timestamp: number;
   metadata?: MetadataMatrixMessage;
+  new_content?: ChatMatrixMessage;
 }
 interface GMUser {
   gmAccessToken: string;
@@ -230,9 +231,11 @@ export function useChatMatrixManager() {
                   : "user",
               content: event.getContent().body, //event.getContent().body,
               metadata: event.getContent().metadata,
+              new_content: event.getContent()["m.new_content"],
               timestamp: event.getAge() ?? 1,
             };
             setMessages((prev) => [...prev, msg]);
+
             console.log(
               // the room name will update with m.room.name events automatically
               "(%s) %s :: %s",
@@ -242,6 +245,7 @@ export function useChatMatrixManager() {
             );
           },
         );
+
         return matrixClient;
       }
       if (gmUser === null) return;
@@ -345,7 +349,6 @@ export function useChatMatrixManager() {
         content,
         "",
       );
-      // await matrix?.sendTextMessage(room_id, content, "");
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -366,8 +369,8 @@ export function useChatMatrixManager() {
         msgtype: MsgType.None,
         body: msg,
         metadata: {
-          eventId,
-          txHash: null,
+          eventId: eventId,
+          txHash: txHash ?? null,
           type,
         },
       };

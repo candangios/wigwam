@@ -36,10 +36,10 @@ const About: FC = () => {
         {process.env.VERSION}
       </div>
 
-      {/* <AboutHeader>Useful links</AboutHeader> */}
-      {/* <LinksBlock links={usefulLinks} /> */}
+      <AboutHeader>Useful links</AboutHeader>
+      <LinksBlock links={usefulLinks} />
 
-      {/* <Separator className="w-[10.375rem] my-3" />
+      {/* <Separator className="w-[10.375rem] my-3" /> */}
 
       <ul className="-mx-1 flex">
         {mediaLinks.map(({ href, label, Icon }, i) => (
@@ -66,7 +66,7 @@ const About: FC = () => {
             </a>
           </li>
         ))}
-      </ul> */}
+      </ul>
     </div>
   );
 };
@@ -123,50 +123,50 @@ const Link: FC<LinkProps> = ({ label, href, className }) => (
 const usefulLinks = [
   {
     label: "Website",
-    href: "https://wigwam.app/",
+    href: "https://1chain.ai/",
   },
-  {
-    label: "Contact us",
-    href: "https://wigwam.app/contact",
-  },
-  {
-    label: "Help",
-    href: "https://wigwam.app/help",
-  },
-  {
-    label: "Terms of Use",
-    href: "https://wigwam.app/terms",
-  },
-  {
-    label: "Privacy policy",
-    href: "https://wigwam.app/privacy",
-  },
+  // {
+  //   label: "Contact us",
+  //   href: "https://wigwam.app/contact",
+  // },
+  // {
+  //   label: "Help",
+  //   href: "https://wigwam.app/help",
+  // },
+  // {
+  //   label: "Terms of Use",
+  //   href: "https://wigwam.app/terms",
+  // },
+  // {
+  //   label: "Privacy policy",
+  //   href: "https://wigwam.app/privacy",
+  // },
 ];
 
 const mediaLinks = [
+  // {
+  //   href: "https://t.me/wigwamapp",
+  //   label: "Telegram",
+  //   Icon: TelegramIcon,
+  // },
   {
-    href: "https://t.me/wigwamapp",
-    label: "Telegram",
-    Icon: TelegramIcon,
-  },
-  {
-    href: "https://twitter.com/wigwam_app",
+    href: "https://x.com/1ChainAI",
     label: "Twitter",
     Icon: TwitterIcon,
   },
-  {
-    href: "https://wigwamapp.medium.com",
-    label: "Medium",
-    Icon: MediumIcon,
-  },
-  {
-    href: "https://github.com/wigwamapp",
-    label: "Github",
-    Icon: GithubIcon,
-  },
-  {
-    href: "https://discord.gg/MAG2fnSqSK",
-    label: "Discord",
-    Icon: DiscordIcon,
-  },
+  // {
+  //   href: "https://wigwamapp.medium.com",
+  //   label: "Medium",
+  //   Icon: MediumIcon,
+  // },
+  // {
+  //   href: "https://github.com/wigwamapp",
+  //   label: "Github",
+  //   Icon: GithubIcon,
+  // },
+  // {
+  //   href: "https://discord.gg/MAG2fnSqSK",
+  //   label: "Discord",
+  //   Icon: DiscordIcon,
+  // },
 ];

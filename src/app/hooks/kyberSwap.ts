@@ -1,6 +1,7 @@
 // import { useAccounts } from "./account";
 import { kyberApi } from "app/components/Assistan/Service/KeyberSwapApi";
 import { useLazyNetwork } from "./network";
+import axios from "axios";
 interface ExtraFeeRM {
   feeAmount?: string;
   chargeFeeBy?: string;
@@ -84,7 +85,7 @@ export function useKyberSwap() {
   async function getSwapRoute(
     tokenIn: string,
     tokenOut: string,
-    amount: string,
+    amountIn: string,
   ) {
     try {
       const respone = await kyberApi.get(
@@ -93,15 +94,35 @@ export function useKyberSwap() {
           params: {
             tokenIn,
             tokenOut,
-            amount,
+            amountIn,
           },
         },
       );
-      const value: GetSwapRouteResponseRM = respone.data;
-      console.log(value);
+      const value: GetSwapRouteResponseRM = respone.data.data;
       return value;
     } catch (error) {
-      throw error;
+      if (axios.isAxiosError(error)) {
+        // Error is an AxiosError
+        console.error("Axios error occurred:", error.message);
+
+        // Access additional error details
+        if (error.response) {
+          throw new Error(
+            `Kyber Api error setting up the request: ${error.response.data.message}`,
+          );
+        } else if (error.request) {
+          throw new Error(
+            `Kyber Api error no response received: ${error.request}`,
+          );
+        } else {
+          throw new Error(
+            `Kyber Api error setting up the request: ${error.message}`,
+          );
+        }
+      } else {
+        // Handle other types of errors (non-Axios errors)
+        throw error;
+      }
     }
   }
   async function getSwapRouteForEncodedData(
@@ -116,7 +137,7 @@ export function useKyberSwap() {
       const respone = await kyberApi.post(
         `${currentNetwork?.chainTag}/api/v1/route/build`,
         {
-          routeSummary,
+          routeSummary: routeSummary,
           deadline,
           slippageTolerance,
           sender,
@@ -124,11 +145,31 @@ export function useKyberSwap() {
           source,
         },
       );
-      const value: GetSwapRouteForEncodedDataResponseRM = respone.data;
-      console.log(value);
+      const value: GetSwapRouteForEncodedDataResponseRM = respone.data.data;
       return value;
     } catch (error) {
-      throw error;
+      if (axios.isAxiosError(error)) {
+        // Error is an AxiosError
+        console.error("Axios error occurred:", error.message);
+
+        // Access additional error details
+        if (error.response) {
+          throw new Error(
+            `Kyber Api error setting up the request: ${error.response.data.message}`,
+          );
+        } else if (error.request) {
+          throw new Error(
+            `Kyber Api error no response received: ${error.request}`,
+          );
+        } else {
+          throw new Error(
+            `Kyber Api error setting up the request: ${error.message}`,
+          );
+        }
+      } else {
+        // Handle other types of errors (non-Axios errors)
+        throw error;
+      }
     }
   }
   async function getSwapInfoWithEncodedData(
@@ -149,11 +190,31 @@ export function useKyberSwap() {
           slippageTolenrace,
         },
       );
-      const value: GetSwapInfoWithEncodedDataResponseRM = respone.data;
-      console.log(value);
+      const value: GetSwapInfoWithEncodedDataResponseRM = respone.data.data;
       return value;
     } catch (error) {
-      throw error;
+      if (axios.isAxiosError(error)) {
+        // Error is an AxiosError
+        console.error("Axios error occurred:", error.message);
+
+        // Access additional error details
+        if (error.response) {
+          throw new Error(
+            `Kyber Api error setting up the request: ${error.response.data.message}`,
+          );
+        } else if (error.request) {
+          throw new Error(
+            `Kyber Api error no response received: ${error.request}`,
+          );
+        } else {
+          throw new Error(
+            `Kyber Api error setting up the request: ${error.message}`,
+          );
+        }
+      } else {
+        // Handle other types of errors (non-Axios errors)
+        throw error;
+      }
     }
   }
 

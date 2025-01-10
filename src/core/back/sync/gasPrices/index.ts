@@ -3,12 +3,12 @@ import memoize from "mem";
 import { GasPrices } from "core/types";
 
 import { getLineaGasPrices } from "./linea";
-import { getIndexerGasPrices } from "./indexerApi";
+// import { getIndexerGasPrices } from "./indexerApi";
 import { getOnChainLegacy } from "./onChainLegacy";
 
 const GAS_PRICES_WAYS = [
   getLineaGasPrices,
-  getIndexerGasPrices,
+  // getIndexerGasPrices,
   getOnChainLegacy,
 ];
 

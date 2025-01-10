@@ -4,7 +4,7 @@ import { useAtomValue } from "jotai";
 
 import { WalletStatus } from "core/types";
 
-import { tgApplicationAtom, walletStateAtom } from "app/atoms";
+// import { tgApplicationAtom, walletStateAtom } from "app/atoms";
 import { useSteps } from "app/hooks/steps";
 import { AddAccountStep } from "app/nav";
 import AddAccountHeader from "app/components/blocks/AddAccountHeader";
@@ -12,11 +12,12 @@ import { ReactComponent as CreateIcon } from "app/icons/addaccount-create.svg";
 import { ReactComponent as ImportIcon } from "app/icons/addaccount-import.svg";
 import { ReactComponent as LedgerIcon } from "app/icons/addaccount-ledger.svg";
 import { ReactComponent as ChevronRightIcon } from "app/icons/chevron-right.svg";
-import { ReactComponent as SuccessGreen } from "app/icons/success-green.svg";
-import drumGameLogoUrl from "app/images/drum-game.png";
+// import { ReactComponent as SuccessGreen } from "app/icons/success-green.svg";
+// import drumGameLogoUrl from "app/images/drum-game.png";
 
 import ConfirmAccounts from "./ConfirmAccounts";
 import LedgerScanModal from "./shared/LedgerScanModal";
+import { walletStateAtom } from "app/atoms";
 
 const AddAccountInitial = memo(() => {
   const { hasSeedPhrase } = useAtomValue(walletStateAtom);
@@ -43,15 +44,15 @@ const ChooseAddAccountWay = memo<{ onLedgerOpened?: () => void }>(
   ({ onLedgerOpened }) => {
     const { walletStatus } = useAtomValue(walletStateAtom);
     const { navigateToStep, stateRef } = useSteps();
-    const tgApplication = useAtomValue(tgApplicationAtom);
+    // const tgApplication = useAtomValue(tgApplicationAtom);
 
-    const existingApplication = useMemo(() => {
-      try {
-        if (tgApplication) return JSON.parse(tgApplication);
-      } catch {}
+    // const existingApplication = useMemo(() => {
+    //   try {
+    //     if (tgApplication) return JSON.parse(tgApplication);
+    //   } catch { }
 
-      return null;
-    }, [tgApplication]);
+    //   return null;
+    // }, [tgApplication]);
 
     useEffect(() => {
       stateRef.current = {};
@@ -71,20 +72,20 @@ const ChooseAddAccountWay = memo<{ onLedgerOpened?: () => void }>(
               navigateToStep(AddAccountStep.CreateSeedPhrase);
             },
           },
-          "divider",
-          {
-            title: existingApplication
-              ? "Drum Game target completed"
-              : "Complete Drum Game target",
-            description: existingApplication
-              ? `You added Telegram username: @${existingApplication.username} and finished game task`
-              : "Add your Telegram @username to finish game task",
-            promotional: existingApplication ? "completed" : true,
-            image: drumGameLogoUrl,
-            action: () => {
-              navigateToStep(AddAccountStep.DrumGameTarget);
-            },
-          },
+          // "divider",
+          // {
+          //   title: existingApplication
+          //     ? "Drum Game target completed"
+          //     : "Complete Drum Game target",
+          //   description: existingApplication
+          //     ? `You added Telegram username: @${existingApplication.username} and finished game task`
+          //     : "Add your Telegram @username to finish game task",
+          //   promotional: existingApplication ? "completed" : true,
+          //   image: drumGameLogoUrl,
+          //   action: () => {
+          //     navigateToStep(AddAccountStep.DrumGameTarget);
+          //   },
+          // },
           "divider",
           {
             title: "Import or recover wallet",
@@ -104,7 +105,7 @@ const ChooseAddAccountWay = memo<{ onLedgerOpened?: () => void }>(
             },
           },
         ] as const,
-      [existingApplication, stateRef, navigateToStep, onLedgerOpened],
+      [stateRef, navigateToStep, onLedgerOpened],
     );
 
     return (
@@ -135,7 +136,7 @@ const ChooseAddAccountWay = memo<{ onLedgerOpened?: () => void }>(
 
             const { title, description, action } = item;
             const Icon = "Icon" in item && item.Icon ? item.Icon : null;
-            const image = "image" in item && item.image ? item.image : null;
+            // const image = "image" in item && item.image ? item.image : null;
             const promotional =
               "promotional" in item && item.promotional
                 ? item.promotional
@@ -168,7 +169,7 @@ const ChooseAddAccountWay = memo<{ onLedgerOpened?: () => void }>(
                     )}
                   />
                 ) : null}
-                {image ? (
+                {/* {image ? (
                   <span className="relative w-[2.75rem] h-[2.75rem] my-auto mx-1 flex justify-center items-center">
                     {promotional === "completed" ? (
                       <SuccessGreen className="w-[1.75rem] h-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fill-[#ffffff] z-[1]" />
@@ -183,7 +184,7 @@ const ChooseAddAccountWay = memo<{ onLedgerOpened?: () => void }>(
                       )}
                     />
                   </span>
-                ) : null}
+                ) : null} */}
 
                 <div
                   className={classNames(

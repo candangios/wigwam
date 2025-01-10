@@ -1,19 +1,19 @@
-import { Box } from '@mui/material';
-import type { FC } from 'react';
-import { useEffect, useRef } from 'react';
-import { useWatch } from 'react-hook-form';
+import { Box } from "@mui/material";
+import type { FC } from "react";
+import { useEffect, useRef } from "react";
+import { useWatch } from "react-hook-form";
 import {
   useChain,
   useDebouncedWatch,
   useTokenBalances,
   useTokenSearch,
-} from '../../hooks';
-import { FormKey, FormKeyHelper, useWallet } from '../../providers';
-import type { TokenAmount } from '../../types';
-import { TokenNotFound } from './TokenNotFound';
-import { VirtualizedTokenList } from './VirtualizedTokenList';
-import type { TokenListProps } from './types';
-import { useTokenSelect } from './useTokenSelect';
+} from "../../hooks";
+import { FormKey, FormKeyHelper, useWallet } from "../../providers";
+import type { TokenAmount } from "../../types";
+import { TokenNotFound } from "./TokenNotFound";
+import { VirtualizedTokenList } from "./VirtualizedTokenList";
+import type { TokenListProps } from "./types";
+import { useTokenSelect } from "./useTokenSelect";
 
 export const TokenList: FC<TokenListProps> = ({
   formType,
@@ -38,24 +38,24 @@ export const TokenList: FC<TokenListProps> = ({
     isLoading: isTokensLoading,
     isBalanceLoading,
     featuredTokens,
-    refetch
+    refetch,
   } = useTokenBalances(selectedChainId);
 
   useEffect(() => {
-    refetch()
-  }, [])
+    refetch();
+  }, [refetch]);
 
   let filteredTokens = (tokensWithBalance ??
     chainTokens ??
     []) as TokenAmount[];
-  const searchFilter = tokenSearchFilter?.toUpperCase() ?? '';
+  const searchFilter = tokenSearchFilter?.toUpperCase() ?? "";
   filteredTokens = tokenSearchFilter
     ? filteredTokens.filter(
-        (token) =>
-          token.name.toUpperCase().includes(searchFilter) ||
-          token.symbol.toUpperCase().includes(searchFilter) ||
-          token.address.toUpperCase().includes(searchFilter),
-      )
+      (token) =>
+        token.name.toUpperCase().includes(searchFilter) ||
+        token.symbol.toUpperCase().includes(searchFilter) ||
+        token.address.toUpperCase().includes(searchFilter),
+    )
     : filteredTokens;
 
   const tokenSearchEnabled =
@@ -75,13 +75,13 @@ export const TokenList: FC<TokenListProps> = ({
   const tokens = filteredTokens.length
     ? filteredTokens
     : searchedToken
-    ? [searchedToken]
-    : filteredTokens;
+      ? [searchedToken]
+      : filteredTokens;
 
   const handleTokenClick = useTokenSelect(formType, onClick);
 
   return (
-    <Box ref={parentRef} style={{ height, overflow: 'auto' }}>
+    <Box ref={parentRef} style={{ height, overflow: "auto" }}>
       {!tokens.length && !isLoading ? (
         <TokenNotFound formType={formType} />
       ) : null}
